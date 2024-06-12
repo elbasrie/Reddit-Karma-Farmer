@@ -1,7 +1,7 @@
 from openai import OpenAI
 
 # DON'T FORGET TO FILL IN YOUR API KEY HERE OR THE BOT WILL NOT BE ABLE TO GENERATE COMMENTS
-client = OpenAI(api_key="YOUR OPENAI API KEY HERE")
+client = OpenAI(api_key="your_api_key",base_url="https://api.pawan.krd/v1/")
 
 
 def generate_comment(
@@ -25,7 +25,7 @@ def generate_comment(
     comments = ", ".join(comments)
 
     response = client.chat.completions.create(
-        model="gpt-3.5-turbo",
+        model="pai-001",
         messages=[
             {
                 "role": "system",
