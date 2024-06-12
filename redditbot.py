@@ -121,14 +121,14 @@ class RedditBot:
                 submission.reply(comment)
                 exit = True
             except RedditAPIException as e:
-                if e.error_type == "RATELIMIT":
+                if e.items[0].error_type == "RATELIMIT":
                     # Sleep for the time specified in the error message
                     sleep(int(e.message.split(" ")[-5]) * 60)
-                elif e.error_type == "THREAD_LOCKED":
+                elif e.items[0].error_type == "THREAD_LOCKED":
                     print("Thread locked. Skipping.")
                     exit = True
                 else:
-                    print(e.error_type)
+                    print(e.items[0].error_type)
                     exit = True
 
         print(f"Replied to '{submission.title}' with '{comment}'")
@@ -175,6 +175,6 @@ class RedditBot:
 
 
 # UNCOMMENT THIS CODE AFTER FILLING IN THE PARAMETERS OF THE REDDIT BOT, MAKE SURE TO FILL THE OPEN AI API KEY IN THE MODEL.PY FILE AS WELL.
-# if __name__ == "__main__":
-# reddit_bot = RedditBot(your_client_id, your_client_secret, your_username, your_password)
-# reddit_bot.run()
+if __name__ == "__main__":
+ reddit_bot = RedditBot("your_client_id", 	"your_secret_id", "your_username", "your_password")
+ reddit_bot.run()
